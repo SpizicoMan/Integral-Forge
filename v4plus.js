@@ -54,32 +54,17 @@ function sfxWrong(){
 }
 
 function normalizeLatex(s){
-  let out = String(s || '')
+  return String(s || '')
     .toLowerCase()
     .replace(/\\exponentiale\b/g,'e')
     .replace(/\\imaginaryi\b/g,'i')
     .replace(/\\left|\\right/g,'')
     .replace(/\\,/g,'')
-    .replace(/\\cdot/g,'')
-    .replace(/\\operatorname\{([^}]*)\}/g,'$1')
-    .replace(/\\placeholder\{[^}]*\}/g,'')
-    .replace(/\|/g,'')
     .replace(/\s+/g,'')
     .replace(/\{\s*/g,'{')
     .replace(/\s*\}/g,'}')
-    .replace(/\+c$/,'');
-
-  // Remove harmless wrapper parentheses around simple atoms/monomials,
-  // e.g. (x) -> x, (x^{21}) -> x^{21}, (24) -> 24
-  let prev = '';
-  while (prev !== out) {
-    prev = out;
-    out = out
-      .replace(/\((x(?:\^\{[^}]+\})?)\)/g, '$1')
-      .replace(/\(([0-9.]+)\)/g, '$1');
-  }
-
-  return out;
+    .replace(/\+c$/,'')
+    .replace(/\\cdot/g,'');
 }
 
 function latexToMathExpr(lx){
@@ -146,13 +131,10 @@ function checkCurrentAnswer(){
   const out = $('checkResult');
   if (!state.current) { out.textContent = 'Generate a problem first.'; return; }
   const mf = $('answerField');
-  const userRaw = mf?.getValue ? mf.getValue('latex') : '';
-  if (!userRaw || !userRaw.trim()) { out.textContent = 'Type an answer first.'; return; }
+  const user = mf?.getValue ? mf.getValue('latex') : '';
+  if (!user || !user.trim()) { out.textContent = 'Type an answer first.'; return; }
 
-  const user = normalizeMathLiveLatex(userRaw);
-  const target = normalizeMathLiveLatex(state.current.a);
-
-  const targetNorm = normalizeLatex(target);
+  const targetNorm = normalizeLatex(state.current.a);
   const userNorm = normalizeLatex(user);
 
   const exact = userNorm === targetNorm;
@@ -165,7 +147,7 @@ function checkCurrentAnswer(){
     return;
   }
 
-  if (approxEquivalent(user, target)) {
+  if (approxEquivalent(user, state.current.a)) {
     out.textContent = '✅ Correct (equivalent form detected)';
     out.style.color = '#7fe7a7';
     sfxSuccess();
