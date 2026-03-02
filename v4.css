@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+
+:root{
+  --bg:#0b1020;
+  --bg2:#101933;
+  --card:#151f3f;
+  --card2:#19264b;
+  --border:#2f427d;
+  --text:#edf2ff;
+  --muted:#aebbe2;
+  --accent:#6aa0ff;
+  --accent-soft:rgba(106,160,255,.18);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  color:var(--text);
+  font-family:'Sora',Inter,Segoe UI,Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(1000px 500px at 10% -10%, #1a2b56 0%, transparent 55%),
+    radial-gradient(900px 450px at 100% 0%, #14264c 0%, transparent 45%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+}
+
+.app{max-width:980px;margin:18px auto;padding:12px}
+
+.card{
+  background:linear-gradient(180deg,var(--card),var(--card2));
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:16px;
+  margin:12px 0;
+  box-shadow:0 8px 24px rgba(0,0,0,.22);
+}
+
+h1,h2{margin:.2rem 0 .7rem;letter-spacing:.2px}
+h1{font-size:1.55rem}
+h2{font-size:1.35rem}
+p{margin:.2rem 0;color:var(--muted)}
+
+.controls{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;align-items:end}
+
+label{font-size:.95rem;color:var(--muted);font-weight:600}
+
+button,select,.answer-input,.answer-field{
+  background:#0f1937;
+  color:var(--text);
+  border:1px solid #395090;
+  border-radius:12px;
+  padding:11px 12px;
+  transition:.14s ease;
+}
+
+button{
+  font-weight:600;
+  cursor:pointer;
+}
+
+button:hover,select:hover{border-color:var(--accent)}
+button:active{transform:translateY(1px)}
+
+button:focus-visible,
+select:focus-visible,
+.answer-input:focus-visible,
+.answer-field:focus-visible{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-soft);
+}
+
+.math{line-height:1.72;font-size:1.04rem}
+.math .katex{font-size:1.16em}
+.muted{color:var(--muted)}
+.meta{margin-top:8px;color:#9cb1e8;font-size:.92rem}
+
+.answer-input{width:100%;margin-bottom:10px}
+.answer-field{display:block;width:100%;min-height:58px;margin-bottom:10px}
+
+.keypad{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.keypad button{padding:10px}
+
+@media(max-width:780px){
+  .controls{grid-template-columns:1fr}
+  .keypad{grid-template-columns:repeat(3,1fr)}
+  h1{font-size:1.35rem}
+  h2{font-size:1.2rem}
+}

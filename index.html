@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Integral Forge</title>
+  <link rel="stylesheet" href="./node_modules/katex/dist/katex.min.css" />
+  <link rel="stylesheet" href="v4.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="card">
+      <h1>Integral Forge</h1>
+    </header>
+
+    <section class="card controls">
+      <label>Difficulty Band</label>
+      <select id="difficulty">
+        <option value="1">1 — Foundation</option>
+        <option value="2">2 — Core</option>
+        <option value="3">3 — Calc II Mixed</option>
+        <option value="4">4 — Advanced Calc II</option>
+        <option value="5">5 — Expert</option>
+        <option value="6">6 — Graduate</option>
+        <option value="7">7 — PhD-ish</option>
+        <option value="chaos">Chaos — full random</option>
+      </select>
+
+      <button id="generate">Generate Integral</button>
+      <button id="hintBtn" disabled>Hint</button>
+      <button id="solBtn" disabled>Solution</button>
+    </section>
+
+    <section class="card">
+      <h2>Problem</h2>
+      <div id="problem" class="math">Generate to begin.</div>
+      <div class="meta" id="meta"></div>
+    </section>
+
+    <section class="card">
+      <h2>Answer Input</h2>
+      <math-field id="answerField" class="answer-field" virtual-keyboard-mode="manual" smart-mode>
+      </math-field>
+      <div class="meta">Use the built-in math keyboard icon for symbols.</div>
+      <div class="keypad" style="grid-template-columns:1fr; margin-top:4px">
+        <button id="checkAnswer" type="button">✅ Check Answer</button>
+      </div>
+      <div id="checkResult" class="meta">No check yet.</div>
+      <h3 style="margin-bottom:6px">Live Preview</h3>
+      <div id="answerPreview" class="math muted">Your formatted input will appear here.</div>
+    </section>
+
+    <section class="card">
+      <h2>Hint</h2>
+      <div id="hint" class="math muted">No hint yet.</div>
+    </section>
+
+    <section class="card">
+      <h2>Solution + Method</h2>
+      <div id="solution" class="math muted">No solution yet.</div>
+    </section>
+  </main>
+
+  <script defer src="./node_modules/katex/dist/katex.min.js"></script>
+  <script defer src="https://unpkg.com/mathlive"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.1/math.min.js"></script>
+  <script defer src="v4plus.js"></script>
+</body>
+</html>
